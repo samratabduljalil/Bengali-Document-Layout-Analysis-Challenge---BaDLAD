@@ -149,7 +149,9 @@ We use the **BaDLAD Dataset** ([paper](https://arxiv.org/abs/2303.05325)), the f
 ```
 
 ---
+**Model link:** https://www.kaggle.com/datasets/samratabduljalil/bengali-document-layout-analysis-dl-sprint-2-0
 
+---
 ## 👨‍💻 Author
 
 **Samrat Abdul Jalil**
