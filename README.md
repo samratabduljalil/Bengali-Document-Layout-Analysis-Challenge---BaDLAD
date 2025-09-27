@@ -117,7 +117,7 @@ We use the **BaDLAD Dataset** ([paper](https://arxiv.org/abs/2303.05325)), the f
 
 ## 🚀 Installation & Usage
 
-To keep this repository simple, **all installation commands and training scripts are included directly inside the Jupyter Notebook (`abc-bhashamul final version.ipynb`)**.
+To keep this repository simple, **all installation commands and training scripts are included directly inside the Jupyter Notebook (`Bengali Document Layout Analysis.ipynb`)**.
 
 👉 Open the notebook and follow the step-by-step instructions for:
 
