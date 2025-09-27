@@ -1,46 +1,158 @@
-# Bengali Document Layout Analysis Challenge - BaDLAD
+# 📄 Multi-Domain Large Bengali Document Layout Analysis 
 
-Bengali is the **fifth most spoken native language worldwide**, making it a critical focus for advancing computational tools and datasets. As part of the **BUET CSE Fest 2023**, the Department of Computer Science and Engineering at BUET partnered with **Bengali.AI** to present **DL Sprint 2.0**, a deep learning competition centered on **Bengali Document Layout Analysis**.
-
-This challenge introduces **BaDLAD**, the **first multi-domain, large Bengali Document Layout Analysis Dataset**, offering participants a unique opportunity to develop innovative solutions for layout analysis.
+*Advancing AI capabilities for the 5th most spoken native language worldwide*
 
 ---
 
-## Competition Overview
+## 🔎 Project Overview
 
-- **Dataset**: A subset of the **BaDLAD dataset**, contributed by Bengali.AI, was used for training and evaluation.  
-  Detailed information about the dataset can be found in the referenced [paper](#).  
-- **Open Participation**: The competition was open to everyone, not just undergraduates. Participants from any institution were encouraged to join.  
- 
+This project addresses the critical need for **automated document layout analysis in Bengali**, leveraging the groundbreaking **BaDLAD dataset**. It focuses on developing intelligent systems that can automatically **detect and segment structural components** in Bengali documents across multiple domains.
 
 ---
 
-## Model Development
+## 🧩 Problem Statement
 
-For this competition, I fine-tuned various models to tackle the Bengali document layout analysis problem effectively. Below are the key highlights:
+Bengali documents present unique challenges for automated analysis due to:
 
-### Models Used
-
-1. **Fast R-CNN with Detectron2**  
-   - Fine-tuned for layout analysis using a subset of BaDLAD.  
-   - **Hyperparameter Tuning**:
-     - **Learning Rate**: Experimented with values such as `0.001`, `0.005`, and `0.01` to find the best configuration.  
-     - **Warm-Up Iterations**: Applied warm-up steps to stabilize initial training, typically set to `1000 iterations`.  
-     - **Max Iterations**: Set to `12000 iterations` for full training cycles.  
-   - **Data Augmentation**:
-     - Applied techniques such as rotation, scaling, cropping, and flipping to improve generalization.
-
-2. **Custom Augmentation Strategies**  
-   - Implemented additional augmentation methods to enhance model robustness and handle diverse document layouts.  
+* Complex **script characteristics** and varied layouts.
+* Diverse **multi-domain sources** (newspapers, government docs, books, war records).
+* Scarcity of **large annotated datasets** for Bengali document understanding.
+* Mixed content requiring **accurate segmentation** (text, images, tables).
 
 ---
 
-## Results
+## 🌍 Real-World Impact
 
-- Fine-tuned **Fast R-CNN** achieved promising results on the BaDLAD dataset, demonstrating its potential for Bengali document layout analysis.  
-- Data augmentation and hyperparameter tuning significantly improved model accuracy and robustness.
+This project enables:
+
+* **OCR Preprocessing** → Accurate layout segmentation improves text recognition.
+* **Digital Archiving** → Preserving historical & liberation war documents.
+* **Government Digitization** → Automating extraction from official records.
+* **Educational Access** → Structured Bengali e-books & magazines.
+* **Search & Accessibility** → Better indexing and retrieval of scanned Bengali documents.
 
 ---
 
-**Model link:** https://www.kaggle.com/datasets/samratabduljalil/bengali-document-layout-analysis-dl-sprint-2-0
+## ✅ Solution Approach
 
+Our solution employs **advanced computer vision techniques** to detect and segment four primary elements:
+
+* **Paragraphs**: Main textual content blocks.
+* **Text Boxes**: Specialized or highlighted text regions.
+* **Images**: Embedded visual content.
+* **Tables**: Structured data presentations.
+
+---
+
+## 📊 Dataset Analysis
+
+We use the **BaDLAD Dataset** ([paper](https://arxiv.org/abs/2303.05325)), the first large, multi-domain Bengali document dataset.
+
+### Training Set Distribution
+
+| Domain                | Samples | Text-box | Paragraph | Image  | Table | Total Annotations |
+| --------------------- | ------- | -------- | --------- | ------ | ----- | ----------------- |
+| Historical Newspapers | 516     | 25,452   | 38,990    | 1,252  | 67    | 65,761            |
+| New Newspapers        | 96      | 3,978    | 2,507     | 494    | 36    | 7,015             |
+| Government Documents  | 77      | 44,017   | 2,260     | 762    | 514   | 47,553            |
+| Magazines & Books     | 18,380  | 123,099  | 162,570   | 7,734  | 594   | 293,997           |
+| Liberation War Docs   | 60      | 27,330   | 3,262     | 551    | 42    | 10,789            |
+| **Total**             | 20,365  | 203,876  | 209,589   | 10,297 | 1,353 | 425,115           |
+
+### Test Set Distribution
+
+| Domain                | Samples | Total Annotations |
+| --------------------- | ------- | ----------------- |
+| Historical Newspapers | 345     | 43,074            |
+| New Newspapers        | 65      | 5,705             |
+| Government Documents  | 51      | 30,183            |
+| Magazines & Books     | 11,674  | 195,996           |
+| Liberation War Docs   | 40      | 7,223             |
+| **Total**             | 13,000  | 282,181           |
+
+### Domain Characteristics
+
+* **Historical Newspapers**: Complex multi-column layouts.
+* **Government Docs**: Formal structured layouts.
+* **Magazines/Books**: Rich with visual + text integration.
+* **Liberation War Records**: Unique preservation challenges.
+
+---
+
+## ⚙️ Methodology
+
+### Model Architecture
+
+* **Backbone**: ResNet-50 + Feature Pyramid Network (FPN).
+* **Head**: **Mask R-CNN** for joint detection + segmentation.
+* **Framework**: **Detectron2** for robust training/inference.
+
+### Key Technical Strategies
+
+* **Multi-Scale Feature Extraction** → handles varied resolutions/layouts.
+* **Domain Adaptation** → robust training across domains.
+* **Data Augmentation**:
+
+  * Brightness/contrast variations
+  * Rotation, flipping
+  * Scale & crop
+
+### Hyperparameter Optimization
+
+* **Learning Rates**: 0.005 (best).
+* **Warm-Up Iterations**: 500 (best).
+* **Training Iterations**: 18,000 (best ).
+* **Batch Size**: 8
+
+---
+
+## 🏆 Results
+
+* **Best Score**: **0.88240** with Mask R-CNN (Detectron2).
+* **YOLOv8** was tested but did not perform as well for polygonal segmentation.
+* Augmentation + hyperparameter tuning were key for robustness.
+
+
+---
+
+## 🔧 Installation
+
+```python
+# Clone repo
+!git clone https://github.com/facebookresearch/detectron2.git
+%cd detectron2
+
+# Install Detectron2
+!pip install -e .
+
+# Install other requirements
+!pip install opencv-python-headless albumentations pycocotools matplotlib tqdm
+```
+
+## 📌 Resources
+
+* **Dataset**: [Kaggle – Bengali Document Layout Analysis](https://www.kaggle.com/datasets/samratabduljalil/bengali-document-layout-analysis-dl-sprint-2-0)
+* **Paper**: [BaDLAD: A Large Multi-Domain Bengali Document Layout Analysis Dataset](https://arxiv.org/abs/2303.05325)
+* **Detectron2**: [GitHub](https://github.com/facebookresearch/detectron2)
+
+---
+
+## 📌 Citation
+
+```bibtex
+@article{shihab2023badlad,
+  title={BaDLAD: A Large Multi-Domain Bengali Document Layout Analysis Dataset},
+  author={Shihab, Md Istiak Hossain and Hasan, Md Rakibul and Emon, Mahfuzur Rahman and Hossen, Syed Mobassir and Ansary, Md Nazmuddoha and Ahmed, Intesur and Rakib, Fazle Rabbi and Dhruvo, Shahriar Elahi and Dip, Souhardya Saha and Pavel, Akib Hasan and others},
+  journal={arXiv preprint arXiv:2303.05325},
+  year={2023}
+}
+```
+
+---
+
+## 👨‍💻 Author
+
+**Samrat Abdul Jalil**
+
+* Kaggle: [@samratabduljalil](https://www.kaggle.com/samratabduljalil)
+* AI/ML Engineer Enthusiast
