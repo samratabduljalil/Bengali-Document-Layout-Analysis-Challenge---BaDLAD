@@ -115,23 +115,21 @@ We use the **BaDLAD Dataset** ([paper](https://arxiv.org/abs/2303.05325)), the f
 
 ---
 
-## 🔧 Installation
+## 🚀 Installation & Usage
 
-```python
-# Clone repo
-!git clone https://github.com/facebookresearch/detectron2.git
-%cd detectron2
+To keep this repository simple, **all installation commands and training scripts are included directly inside the Jupyter Notebook (`abc-bhashamul final version.ipynb`)**.
 
-# Install Detectron2
-!pip install -e .
+👉 Open the notebook and follow the step-by-step instructions for:
 
-# Install other requirements
-!pip install opencv-python-headless albumentations pycocotools matplotlib tqdm
-```
+* Installing dependencies
+* Preprocessing the dataset
+* Training models
+* Running inference
+
+---
 
 ## 📌 Resources
 
-* **Dataset**: [Kaggle – Bengali Document Layout Analysis](https://www.kaggle.com/datasets/samratabduljalil/bengali-document-layout-analysis-dl-sprint-2-0)
 * **Paper**: [BaDLAD: A Large Multi-Domain Bengali Document Layout Analysis Dataset](https://arxiv.org/abs/2303.05325)
 * **Detectron2**: [GitHub](https://github.com/facebookresearch/detectron2)
 
